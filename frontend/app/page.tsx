@@ -4,17 +4,17 @@ import TaskList from "@/components/TaskList";
 import { useState } from "react";
 
 export default function Home() {
-  const [tasks, setTasks] = useState<task[]>([
-    { id: "1", description: "Task 1", completed: false },
-    { id: "2", description: "Task 2", completed: false },
-    { id: "3", description: "Task 3", completed: false },
-  ]);
+  const [tasks, setTasks] = useState<task[]>([]);
 
   const saveTask = (description: string) => {
     setTasks([
       ...tasks,
       { id: (tasks.length + 1).toString(), description, completed: false },
     ]);
+  };
+
+  const deleteTask = (id: string) => {
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
   return (
@@ -24,7 +24,7 @@ export default function Home() {
         <TaskForm saveTask={saveTask} />
         <div className="w-full">
           <h2 className="text-lg font-semibold py-2">Tasks List</h2>
-          <TaskList tasks={tasks} />
+          <TaskList tasks={tasks} deleteTask={deleteTask} />
         </div>
       </main>
     </div>

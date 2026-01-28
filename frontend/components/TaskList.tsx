@@ -1,8 +1,9 @@
 interface TaskListProps {
   tasks: task[];
+  deleteTask: (id: string) => void;
 }
 
-export default function TaskList({ tasks }: TaskListProps) {
+export default function TaskList({ tasks, deleteTask }: TaskListProps) {
   return (
     <ul className="w-full">
       {tasks.map((task) => (
@@ -13,7 +14,12 @@ export default function TaskList({ tasks }: TaskListProps) {
           </div>
           <div className="flex gap-2">
             <button className="bg-blue-300 px-2 py-1 rounded">Editar</button>
-            <button className="bg-red-400 px-2 py-1 rounded">Eliminar</button>
+            <button
+              className="bg-red-400 px-2 py-1 rounded"
+              onClick={() => deleteTask(task.id)}
+            >
+              Eliminar
+            </button>
           </div>
         </li>
       ))}
